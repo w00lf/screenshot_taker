@@ -1,0 +1,22 @@
+App.messages = App.cable.subscriptions.create({ channel: "ScrappingTaskChannel", uuid: "<%= @scrapping_task.uuid %>" }, {
+  received: function(data) {
+    console.log('Received message');
+    if (data.status_message) return this.updateStatusMessage(data.status_message);
+    var container = document.querySelector('#messages');
+    var entry = document.createElement("p");
+    entry.innerHTML = this.renderMessage(data);
+    container.appendChild(entry);
+    return true;
+  },
+
+  updateStatusMessage: function(status_message) {
+    var container = document.querySelector('#status');
+    container.innerHTML = status_message;
+    return true;
+  },
+
+  renderMessage: function(data) {
+    console.log('Render message');
+    return "<img src='" + data.image_url + "' />" + "<a href='" + data.url + "'>Site link</a>";
+  }
+});

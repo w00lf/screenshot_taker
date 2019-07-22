@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Uuid:</strong>
+  <%= @scrapping_task.uuid %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @scrapping_task.name %>
+</p>
+
+<%= link_to 'Edit', edit_scrapping_task_path(@scrapping_task) %> |
+<%= link_to 'Back', scrapping_tasks_path %>

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Scrapping Tasks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Uuid</th>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @scrapping_tasks.each do |scrapping_task| %>
+      <tr>
+        <td><%= scrapping_task.uuid %></td>
+        <td><%= scrapping_task.name %></td>
+        <td><%= link_to 'Show', scrapping_task %></td>
+        <td><%= link_to 'Edit', edit_scrapping_task_path(scrapping_task) %></td>
+        <td><%= link_to 'Destroy', scrapping_task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Scrapping Task', new_scrapping_task_path %>
