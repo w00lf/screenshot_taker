@@ -1,16 +1,17 @@
 class WatirBrowser
-  BROWSER_WIDTHS = (860..1280).step(20).to_a.freeze
-  BROWSER_HEIGHTS = (1012..1020).to_a.freeze
-  DEFAULT_CHROMEDRIVER_ARGS = ['--headless', '--no-sandbox', '--disable-dev-shm-usage', '--disable-gpu'].freeze
+  BROWSER_WIDTHS = (1200..1400).step(20).to_a.freeze
+  BROWSER_HEIGHTS = (1200..1600).to_a.freeze
+  DEFAULT_CHROMEDRIVER_ARGS = ['--no-sandbox', '--disable-dev-shm-usage', '--disable-gpu'].freeze
   DEFAULT_PAGE_LOAD_TIMEOUT = 120
 
   attr_accessor :watir_browser
 
-  def self.browser(with_proxy: true)
+  def self.browser(with_proxy: false)
     new(with_proxy).watir_browser
   end
 
-  def initialize(with_proxy)
+  def initialize(with_proxy: false, headless: true)
+    @headless = headless
     @with_proxy = with_proxy
 
     capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(capabilities_args)
@@ -38,6 +39,7 @@ class WatirBrowser
   def chromedriver_args
     args = DEFAULT_CHROMEDRIVER_ARGS
     args += ["--proxy-server=#{proxy_path}"] if @with_proxy
+    args += ["--headless"] if @headless
     args
   end
 end

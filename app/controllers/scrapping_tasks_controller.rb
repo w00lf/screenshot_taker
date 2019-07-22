@@ -29,6 +29,7 @@ class ScrappingTasksController < ApplicationController
 
     respond_to do |format|
       if @scrapping_task.save
+        ScrapeProviderSitesJob.perform_later(@scrapping_task.reload.id)
         format.html { redirect_to @scrapping_task, notice: 'Scrapping task was successfully created.' }
         format.js { render :show }
       else
