@@ -1,0 +1,3 @@
+this:
+  host: {{ inventory_hostname }}
+  ip: {{ ansible_eth0.ipv4.address }}

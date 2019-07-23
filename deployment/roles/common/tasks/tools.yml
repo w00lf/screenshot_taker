@@ -1,0 +1,31 @@
+- name: Install Tools
+  apt: name={{ item }} state=latest update_cache=true
+  with_items:
+    - build-essential
+    - openssl
+    - tmux
+    - vim
+    - htop
+    - git-core
+    - wget
+    - curl
+    - libssl-dev
+    - libreadline-dev
+    - zlib1g-dev
+    - autoconf
+    - bison
+    - build-essential
+    - libyaml-dev
+    - libreadline-dev
+    - libncurses5-dev
+    - libffi-dev
+    - libgdbm-dev
+    - libpq-dev
+    - bsdtar
+    - unzip
+
+- name: Install NodeJs
+  apt: name=nodejs state=latest update_cache=true
+
+- name: Install npm
+  apt: name=npm state=latest update_cache=true
