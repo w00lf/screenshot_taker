@@ -13,7 +13,6 @@ class ScrapeProviderSitesJob < ApplicationJob
 
   def perform(scrapping_task_id)
     scrapping_task = ScrappingTask.find(scrapping_task_id)
-    browser = WatirBrowser.new(headless: false).watir_browser
     DOMAINS_TO_CHECK.each do |(url, attributes)|
       ActionCable.server.broadcast "scrapping_task_#{scrapping_task.uuid}", status_message: "Parsing: #{url}..."
       results = SiteScreenshotTakeService.call(
@@ -22,7 +21,7 @@ class ScrapeProviderSitesJob < ApplicationJob
                   field_to_fill: attributes[:field_to_fill],
                   autocomlite_selector: attributes[:autocomlite_selector],
                   button_submit: attributes[:button_submit],
-                  headless: true)
+                  headless: true) rescue {}
       ActionCable.server.broadcast "scrapping_task_#{scrapping_task.uuid}", image_url: results[:image_url], url: results[:url]
       ActionCable.server.broadcast "scrapping_task_#{scrapping_task.uuid}", status_message: "Done: #{url}."
     end

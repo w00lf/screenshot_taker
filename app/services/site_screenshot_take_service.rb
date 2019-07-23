@@ -11,14 +11,14 @@ class SiteScreenshotTakeService
     end
     browser.element(css: button_submit).wait_until(&:present?).click() if button_submit
     sleep 3
-    screenshot_location = '/Users/mitaraskin/Work/Personal/screenshot_taker/public'
+    screenshot_location = Rails.root.join('public', 'crawl_results')
     screenshot_file = "site_image_#{SecureRandom.uuid}.png"
     browser.screenshot.save(File.join(screenshot_location, screenshot_file))
     last_url = browser.url
     browser.close()
     {
       url: last_url,
-      image_url: "http://localhost:3000/#{screenshot_file}"
+      image_url: "http://#{Settings.this.host}/crawl_results/#{screenshot_file}"
     }
   end
 end
