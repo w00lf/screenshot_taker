@@ -1,24 +1,26 @@
-<%= form_for(scrapping_task, remote: true) do |form| %>
-  <% if scrapping_task.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(scrapping_task.errors.count, "error") %> prohibited this scrapping_task from being saved:</h2>
+<div class="col-md-6">
+  <%= form_for(scrapping_task, remote: true) do |form| %>
+    <% if scrapping_task.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(scrapping_task.errors.count, "error") %> prohibited this scrapping_task from being saved:</h2>
 
-      <ul>
-      <% scrapping_task.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% scrapping_task.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <label for="name">Address</label>
+      <%= form.text_field :name, class: 'form-control' %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit 'Submit', class: 'btn btn-primary', id: 'scrapping_task_submit' %>
     </div>
   <% end %>
-
-  <div class="form-group">
-    <label for="name">Address</label>
-    <%= form.text_field :name, class: 'form-control' %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit 'Submit', class: 'btn btn-primary', id: 'scrapping_task_submit' %>
-  </div>
-<% end %>
-<div id="status"></div>
-<div id="messages" style="display: flex"></div>
+  <div id="status"></div>
+</div>
+<div id="messages" class="col-md-10"></div>

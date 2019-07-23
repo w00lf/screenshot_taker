@@ -3,7 +3,8 @@ App.messages = App.cable.subscriptions.create({ channel: "ScrappingTaskChannel",
     console.log('Received message', data);
     if (data.status_message) return this.updateStatusMessage(data.status_message);
     var container = document.querySelector('#messages');
-    var entry = document.createElement("p");
+    var entry = document.createElement("div");
+    entry.className = 'parse_item';
     entry.innerHTML = this.renderMessage(data);
     container.appendChild(entry);
     entry.scrollIntoView();
