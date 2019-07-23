@@ -1,13 +1,13 @@
 require 'utils/watir_browser'
 
 class SiteScreenshotTakeService
-  DEFAULT_TIMEOUT = 3
+  DEFAULT_TIMEOUT = 5
 
   def self.call(url:, field_to_fill:, info_to_fill:, autocomlite_selector:, button_submit:, concess_accept:, headless: true)
     browser = WatirBrowser.new(headless: headless).watir_browser
     browser.goto(url)
     browser.element(css: concess_accept).wait_until(timeout: DEFAULT_TIMEOUT, &:enabled?).click() if concess_accept
-    browser.text_field(css: field_to_fill).wait_until(timeout: DEFAULT_TIMEOUT, &:enabled?).set(info_to_fill)
+    browser.text_field(css: field_to_fill).wait_until(&:present?).set(info_to_fill)
     2.times do
       browser.element(css: autocomlite_selector).wait_until(timeout: DEFAULT_TIMEOUT, &:present?).click() rescue print('Cannot click second time on elem, skipping')
     end

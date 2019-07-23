@@ -1,4 +1,5 @@
 <div class="col-md-6">
+
   <%= form_for(scrapping_task, remote: true) do |form| %>
     <% if scrapping_task.errors.any? %>
       <div id="error_explanation">
@@ -12,9 +13,10 @@
       </div>
     <% end %>
 
-    <div class="form-group">
+    <div class="form-group autocomplete-container">
       <label for="name">Address</label>
-      <%= form.text_field :name, class: 'form-control' %>
+      <%# <input type="search" id="dawa-autocomplete-input" class="form-control"> %>
+      <%= form.search_field :name, class: 'form-control', id: "dawa-autocomplete-input"  %>
     </div>
 
     <div class="actions">
