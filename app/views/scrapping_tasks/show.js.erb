@@ -6,7 +6,7 @@ App.messages = App.cable.subscriptions.create({ channel: "ScrappingTaskChannel",
     var entry = document.createElement("div");
     entry.className = 'parse_item';
     entry.innerHTML = this.renderMessage(data);
-    container.appendChild(entry);
+    container.prepend(entry);
     entry.scrollIntoView();
     return true;
   },
