@@ -1,4 +1,9 @@
 class ScrappingTasksController < ApplicationController
+  # GET /scrapping_tasks/new
+  def new
+    @scrapping_task = ScrappingTask.new
+  end
+
   # POST /scrapping_tasks
   # POST /scrapping_tasks.json
   def create
